@@ -1,0 +1,37 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+*.env
+
+# Django local settings
+*.sqlite3
+db.sqlite3
+
+# Static files (if you don't want to track them)
+staticfiles/
+static/
+media/
+
+# Logs
+*.log
+
+# IDE / editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+
+hireflow/settings.py
