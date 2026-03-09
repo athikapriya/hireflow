@@ -1,0 +1,32 @@
+/* =============== reset code and common code starts here =============== */
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+:root{
+    --brand-color: #0AAF99;
+    --secondary-color : #3D4D82;
+    --tertiary-color : #495057;
+    --quaternary-color : #F3F6F9;
+}
+
+.main-heading{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+/* =============== reset code and common code ends here =============== */

@@ -15,8 +15,6 @@ db.sqlite3
 
 # Static files (if you don't want to track them)
 staticfiles/
-static/
-media/
 
 # Logs
 *.log
