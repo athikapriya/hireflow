@@ -1,3 +1,8 @@
+# third party imports
 from django.contrib import admin
 
-# Register your models here.
+# local imports
+from .models import User, JobCompany
+
+admin.site.register(User)
+admin.site.register(JobCompany)
