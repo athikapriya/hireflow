@@ -35,9 +35,27 @@
     {% endblock %}
 </head>
 <body>
-    
-    {% block content %}
-    {% endblock %}
+
+  <!-- ============== sidebar =============== -->
+  {% include 'base/sidebar.html' %}
+
+  <div id="content">
+    <!-- =============== topbar =============== -->
+    {% include 'base/topbar.html' %}
+
+    <!-- =============== main contents starts =============== -->
+    <section class="container mt-4  w-100">
+      {% block content %}
+      {% endblock %}
+    </section>
+    <!-- =============== main contents ends =============== -->
+
+    <!-- =============== footer =============== -->
+    {% include 'base/footer.html' %}
+
+  </div>
+  
+  
 
     <!-- =============== bootstrap js cdn =============== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

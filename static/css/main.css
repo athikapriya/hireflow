@@ -10,6 +10,9 @@
 
 body{
     font-family: "Roboto", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
 }
 
 html{
@@ -17,16 +20,165 @@ html{
 }
 
 :root{
-    --brand-color: #0AAF99;
-    --secondary-color : #3D4D82;
+    --brand-color: #3D4D82;
+    --secondary-color :#0AAF99;
     --tertiary-color : #495057;
-    --quaternary-color : #F3F6F9;
+    --quaternary-color : #f0f0f1;
+
+    --navlink-color : #abb9e8;
+
+    --border-radius : 4px;
+
 }
 
 .main-heading{
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--brand-color);
+}
+
+.btn:focus,
+.btn:active,
+.form-control:focus {
+    outline: none !important;    
+    box-shadow: none !important;    
+    background-color: transparent !important;
 }
 
 /* =============== reset code and common code ends here =============== */
+
+
+/* =============== sdidebar starts here =============== */
+
+#sidebar {
+  width: 220px;
+  transition: all 0.3s;
+  background-color: var(--brand-color);
+  color: white;
+}
+
+#sidebar.collapsed {
+  width: 70px;
+}
+
+#sidebar .flex-column{
+  align-content: center;
+}
+
+#sidebar .nav-link {
+  color: var(--navlink-color);
+  font-size: 1rem;
+}
+
+#sidebar .nav-link:hover {
+  color: var(--quaternary-color);
+}
+
+#sidebar.collapsed .label-text, #sidebar.collapsed .logo-name {
+  display: none;
+}
+
+#sidebar.collapsed .icon-only {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+#sidebar.collapsed .site-name, #sidebar.collapsed hr{
+  display: none;
+}
+/* =============== sidebar ends here =============== */
+
+
+/* =============== main contents container starts here =============== */
+#content {
+  flex: 1;
+}
+
+.navbar-custom {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0;
+}
+
+.navbar-custom .navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus{
+  box-shadow: none;
+}
+
+.btn{
+  --bs-btn-box-shadow : transparent;
+  --bs-btn-border-width: 0px;
+}
+
+.btn-close {
+  --bs-btn-close-focus-shadow: transparent;
+}
+
+.navbar{
+  --bs-navbar-toggler-border-color: transparent;
+}
+
+.navbar-toggler{
+  line-height: 0;
+  border : none;
+}
+
+#sidebarToggle{
+  padding: 0;
+}
+
+#sidebarToggle .fa-solid{
+  color: var(--brand-color);
+  font-size: 1.25rem;
+}
+
+.navbar-custom .topbar-logo{
+  display: none !important;
+}
+
+.search-form svg{
+  color: var(--tertiary-color);
+}
+
+.search-form input{
+  border: none;
+  background-color: transparent;
+}
+
+.search-form{
+  background-color: var(--quaternary-color);
+  padding: 0.25rem 0.8rem;
+  border-radius: var(--border-radius);
+}
+
+.search-form input::placeholder{
+  font-size: 0.9rem;
+}
+
+.search-form .form-control{
+  padding: 0.15rem;
+  padding-left: 0.35rem;
+}
+
+.navbar-custom .fa-bell{
+  color: var(--brand-color);
+  font-size: 1rem;
+}
+/* =============== main contents container ends here =============== */
+
+
+/* =============== footer starts here =============== */
+footer{
+  background-color: #fff;
+}
+
+footer .footer-contents{
+  font-size: 0.85rem; 
+  color: #7f8b97;
+}
+/* =============== footer ends here =============== */

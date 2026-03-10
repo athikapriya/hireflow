@@ -5,8 +5,8 @@ from django.shortcuts import render
 
 # =============== homepage view starts =============== 
 
-def homepage(request):
+def dashboard(request):
     context = {}
-    return render(request, 'base/homepage.html', context)
+    return render(request, 'base/dashboard.html', context)
 
 # =============== homepage view ends =============== 

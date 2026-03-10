@@ -19,11 +19,37 @@
 /* =============== md screen =============== */
 @media screen and (max-width: 768px) {
     
+    /* =============== main contents =============== */
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        z-index: 1050;
+    }
+
+    #sidebar.show {
+        left: 0;
+    }
+
+    #sidebar.collapsed {
+        width: 250px;
+    }
+
+      .navbar-custom .topbar-logo{
+        display: block !important;
+        margin-right: 10px;
+    }
 }
 
 
 /* =============== sm screen =============== */
 @media screen and (max-width: 576px) {
+
+    /* =============== main contents =============== */
+    .search-form{
+        display: none !important;
+    }
     
 }
 

@@ -8,5 +8,5 @@ from .import views
 
 # =============== urlpatterns =============== 
 urlpatterns = [
-    path("", views.homepage),
+    path("dashboard/", views.dashboard, name="dashboard"),
 ]
