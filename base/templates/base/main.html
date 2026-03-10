@@ -39,12 +39,12 @@
   <!-- ============== sidebar =============== -->
   {% include 'base/sidebar.html' %}
 
-  <div id="content">
+  <div id="content" class="d-flex flex-column min-vh-100">
     <!-- =============== topbar =============== -->
     {% include 'base/topbar.html' %}
 
     <!-- =============== main contents starts =============== -->
-    <section class="container mt-4  w-100">
+    <section class="container mt-4 w-100 flex-grow-1">
       {% block content %}
       {% endblock %}
     </section>
