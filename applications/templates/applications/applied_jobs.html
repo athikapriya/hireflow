@@ -1,0 +1,11 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Applied Jobs</h2>
+<ul>
+{% for app in applications %}
+    <li>{{ app.job.title }} - Status: {{ app.status }}</li>
+{% empty %}
+    <li>You have not applied to any jobs yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}
