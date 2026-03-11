@@ -1,0 +1,145 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<!-- ===============employer dashboard starts here =============== -->
+<section id="dashboard" >
+
+    <!-- =============== section header starts =============== -->
+    <div class="section-header container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="main-heading mb-0">Dashboard</h2>
+            <div class="page-name d-flex gap-1 align-items-center">
+                <span>HireFlow</span>
+                <i class="fa-solid fa-angle-right" style="font-size: 0.65rem;"></i>
+                <a href="{% url 'employer_dashboard' %}" class="text-decoration-none">   Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <!-- =============== section header ends =============== -->
+
+
+
+
+
+ 
+
+    <h2 class="mb-4">Employer Dashboard</h2>
+
+    <!-- ================= Stats Cards ================= -->
+    <div class="row">
+
+        <!-- Total Jobs -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Jobs</h6>
+                    <h2>{{ total_jobs }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Jobs -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Active Jobs</h6>
+                    <h2>{{ active_jobs }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Applications -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">Total Applications</h6>
+                    <h2>{{ total_applications }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Applications -->
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center">
+                    <h6 class="text-muted">New Applications</h6>
+                    <h2>{{ new_applications }}</h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ================= Recent Applications ================= -->
+
+    <div class="card mt-5 shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">Recent Applications</h5>
+        </div>
+
+        <div class="card-body p-0">
+
+            <table class="table table-hover mb-0">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Candidate</th>
+                        <th>Job Title</th>
+                        <th>Status</th>
+                        <th>Applied Date</th>
+                        <th>Resume</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for application in recent_applications %}
+                    <tr>
+                        <td>{{ application.candidate.username }}</td>
+                        <td>{{ application.job.title }}</td>
+                        <td>
+                            <span class="badge bg-info">
+                                {{ application.status }}
+                            </span>
+                        </td>
+                        <td>{{ application.applied_at|date:"M d, Y" }}</td>
+                        <td>
+                            <a href="{{ application.resume.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center p-4">
+                            No recent applications
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+<!-- =============== employer dashboard ends here =============== -->
+
+{% endblock %}
