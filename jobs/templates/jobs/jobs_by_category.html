@@ -1,0 +1,14 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Jobs in Category: {{ category.name }}</h2>
+<ul>
+    {% for job in jobs %}
+        <li>
+            <a href="{% url 'jobs:job_detail' job.slug %}">{{ job.title }}</a>
+            at {{ job.company.name }}
+        </li>
+    {% empty %}
+        <li>No jobs in this category yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

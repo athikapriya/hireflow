@@ -1,0 +1,26 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Browse Jobs</h2>
+
+<form method="GET">
+
+    <input type="text" name="q" placeholder="Search jobs">
+
+    <!-- <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search jobs"> -->
+
+    <button type="submit">Search</button>
+
+</form>
+
+
+<ul>
+    {% for job in jobs %}
+        <li>
+            <a href="{% url 'jobs:job_detail' job.slug %}">{{ job.title }}</a> at {{ job.company.name }}
+            - {{ job.job_type }}
+        </li>
+    {% empty %}
+        <li>No jobs available at the moment.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

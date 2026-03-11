@@ -1,0 +1,18 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Manage Your Jobs</h2>
+
+<a href="{% url 'jobs:create_job' %}" class="btn btn-primary">Post New Job</a>
+
+<ul>
+    {% for job in jobs %}
+        <li>
+            <a href="{% url 'jobs:job_detail' job.slug %}">{{ job.title }}</a>
+            - {{ job.status|title }}
+            - <a href="{% url 'jobs:edit_job' job.id %}">Edit</a>
+        </li>
+    {% empty %}
+        <li>You haven't posted any jobs yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
