@@ -1,0 +1,24 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Edit Company</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" id="name" value="{{ company.name }}"><br><br>
+
+    <label for="description">Description:</label><br>
+    <textarea name="description" id="description">{{ company.description }}</textarea><br><br>
+
+    <label for="website">Website:</label><br>
+    <input type="url" name="website" id="website" value="{{ company.website }}"><br><br>
+
+    <label for="location">Location:</label><br>
+    <input type="text" name="location" id="location" value="{{ company.location }}"><br><br>
+
+    <label for="logo">Logo:</label><br>
+    <input type="file" name="logo" id="logo"><br><br>
+
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Company Profile</h2>
+
+{% if company %}
+    <p><strong>Name:</strong> {{ company.name }}</p>
+    <p><strong>Description:</strong> {{ company.description }}</p>
+    <p><strong>Website:</strong> 
+        {% if company.website %}
+            <a href="{{ company.website }}" target="_blank">{{ company.website }}</a>
+        {% else %}
+            Not provided
+        {% endif %}
+    </p>
+    <p><strong>Location:</strong> {{ company.location }}</p>
+    {% if company.logo %}
+        <p><img src="{{ company.logo.url }}" alt="{{ company.name }}" width="150"></p>
+    {% endif %}
+
+    <a href="{% url 'companies:edit_company' %}">Edit Company</a>
+{% else %}
+    <p>No company created yet.</p>
+{% endif %}
+{% endblock %}
