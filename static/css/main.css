@@ -13,6 +13,7 @@ body{
     min-height: 100vh;
     display: flex;
     overflow-x: hidden;
+    background-color: #F3F3F9;
 }
 
 html{
@@ -21,7 +22,7 @@ html{
 
 :root{
     --brand-color: #3D4D82;
-    --secondary-color :#0AAF99;
+    --secondary-color :#7f8b97;
     --tertiary-color : #495057;
     --quaternary-color : #f0f0f1;
 
@@ -32,9 +33,9 @@ html{
 }
 
 .main-heading{
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--brand-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--tertiary-color);
 }
 
 .btn:focus,
@@ -179,6 +180,27 @@ footer{
 
 footer .footer-contents{
   font-size: 0.85rem; 
-  color: #7f8b97;
+  color: var(--secondary-color);
 }
 /* =============== footer ends here =============== */
+
+
+/* =============== dashboard starts here =============== */
+.section-header{
+  background-color: #fff;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 1px 1px 5px #bed0e1;
+}
+
+#dashboard .section-header .page-name{
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+#dashboard .section-header .page-name a, #dashboard .section-header .page-name .fa-solid{
+  color: var(--tertiary-color);
+}
+
+
+/* =============== dashbord ends here =============== */
