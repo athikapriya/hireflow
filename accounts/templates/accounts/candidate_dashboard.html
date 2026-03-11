@@ -1,0 +1,32 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Candidate Dashboard</h2>
+<p>Welcome, {{ request.user.username }}</p>
+
+<h3>Your Applications</h3>
+<ul>
+{% for app in applications %}
+    <li>{{ app.job.title }} - Status: {{ app.status }}</li>
+{% empty %}
+    <li>No applications yet.</li>
+{% endfor %}
+</ul>
+
+<h3>Saved Jobs</h3>
+<ul>
+{% for saved in saved_jobs %}
+    <li>{{ saved.job.title }}</li>
+{% empty %}
+    <li>No saved jobs.</li>
+{% endfor %}
+</ul>
+
+<h3>Browse Jobs</h3>
+<ul>
+{% for job in jobs %}
+    <li>{{ job.title }} - {{ job.company.name }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'profile' %}">Profile</a> | <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}

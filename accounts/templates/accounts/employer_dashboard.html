@@ -1,0 +1,32 @@
+{% extends "base/main.html" %}
+{% block content %}
+<h2>Employer Dashboard</h2>
+<p>Welcome, {{ request.user.username }}</p>
+
+<h3>Your Company</h3>
+{% if company %}
+    <p>{{ company.name }}</p>
+{% else %}
+    <p>No company yet</p>
+{% endif %}
+
+<h3>Jobs You Posted</h3>
+<ul>
+{% for job in jobs %}
+    <li>{{ job.title }} - Applications: {{ job.application_set.count }}</li>
+{% empty %}
+    <li>No jobs posted yet.</li>
+{% endfor %}
+</ul>
+
+<h3>Applications Received</h3>
+<ul>
+{% for app in applications %}
+    <li>{{ app.candidate.user.username }} applied for {{ app.job.title }}</li>
+{% empty %}
+    <li>No applications yet.</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'profile' %}">Profile</a> | <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
