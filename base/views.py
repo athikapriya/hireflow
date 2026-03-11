@@ -1,12 +1,12 @@
 # third party imports
 from django.shortcuts import render
+from .models import *
 
 
 
-# =============== homepage view starts =============== 
-
-def dashboard(request):
+# =============== employer dashboard view starts =============== 
+def homepage(request):
     context = {}
-    return render(request, 'base/dashboard.html', context)
+    return render(request, "base/homepage.html", context)
 
-# =============== homepage view ends =============== 
+# =============== employer dashboard view ends =============== 
