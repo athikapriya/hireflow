@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual environment
+venv/
+env/
+
+# Node / npm
+node_modules/
+package-lock.json
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Environment variables
+.env
+*.env
+
+# Django
+staticfiles/
+media/
+logs/
+*.log
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+
+# settings
+hireflow/settings.py

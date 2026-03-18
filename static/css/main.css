@@ -1,0 +1,24 @@
+/* =============== common code starts here =============== */
+:root{
+    --primary-color : #405189;
+    --secondary-color : #212A35;
+    --tertiary-color : #ffffff;
+
+    --border-radius : 4px;
+    --transition: 0.4s all;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    background-color: #F3F3F9;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Ubuntu", sans-serif;
+}
+
+/* =============== common code ends here =============== */
