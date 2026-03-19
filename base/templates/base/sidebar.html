@@ -1,0 +1,34 @@
+{% load static %}
+
+<!-- =============== sidebar starts =============== -->
+<nav id="sidebar" class="d-flex flex-column p-3">
+
+  <!-- =============== logo starts =============== -->
+  <div style="height: 25px; margin-bottom: 2.2rem;" class="text-center d-flex align-items-center justify-content-center gap-2">
+    <img src="{% static 'images/logo.webp' %}" alt="HireFlow logo" style="height: 100%;">
+    <h1 class="fw-medium  logo-name mb-0" style="font-size: 1.15rem;">HireFlow</span>
+  </div>
+  <!-- =============== logo ends =============== -->
+  
+  <!-- =============== nav link starts =============== -->
+  {% if request.user.is_authenticated %}
+    {% if request.user.role == 'employer' %}
+
+      {% include 'base/partials/employer_sidebar.html' %}
+
+    {% else %}
+
+      {% include 'base/partials/candidate_sidebar.html' %}
+
+    {% endif %}
+  {% endif %}
+  <!-- =============== nav link ends =============== -->
+
+    <hr>
+
+    <div class="mt-auto text-center site-name" style="font-size: 0.85rem;">
+      <small>© 2026 HireFlow</small>
+    </div>
+
+</nav>
+<!-- =============== sidebar ends =============== -->

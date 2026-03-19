@@ -12,19 +12,48 @@
 
 /* =============== lg screen =============== */
 @media screen and (max-width: 992px) {
-    
+
+    /* =============== sidebar =============== */
+    #sidebar{
+        width: 200px;
+    }
 }
 
 
 /* =============== md screen =============== */
 @media screen and (max-width: 768px) {
     
+    /* =============== sidebar =============== */
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        height: 100%;
+        z-index: 1050;
+    }
+
+    #sidebar.show {
+        left: 0;
+    }
+
+    #sidebar.collapsed {
+        width: 250px;
+    }
+
+    /* =============== topbar =============== */
+    .navbar-custom .topbar-logo{
+        display: block !important;
+        margin-right: 10px;
+    }
 }
 
 
 /* =============== sm screen =============== */
 @media screen and (max-width: 576px) {
-    
+    /* =============== topbar =============== */
+    .search-form{
+        display: none !important;
+    }
 }
 
 

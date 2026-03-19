@@ -1,4 +1,8 @@
 {% extends 'base/main.html' %}
 {% block content %}
 <h1>Welcome to Hireflow</h1>
+
+<a href="{% url 'candidate_register' %}">Join as Candidate</a>
+<a href="{% url 'employer_register' %}">Hire Talent</a>
+<a href="{% url 'login' %}">Login</a>
 {% endblock %}

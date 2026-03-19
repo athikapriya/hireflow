@@ -34,10 +34,24 @@
 </head>
 <body>
 
-    {% block content %}
+    <!-- ============== sidebar =============== -->
+    {% include 'base/sidebar.html' %}
 
-    {% endblock %}
-    
+    <div id="content" class="d-flex flex-column min-vh-100">
+        <!-- =============== topbar =============== -->
+        {% include 'base/topbar.html' %}
+
+        <!-- =============== main contents starts =============== -->
+        <div class="w-100 flex-grow-1">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <!-- =============== main contents ends =============== -->
+
+        <!-- =============== footer =============== -->
+        {% include 'base/footer.html' %}
+
+    </div>
 
 
     <!-- =============== bootstrap js cdn =============== -->
