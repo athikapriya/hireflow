@@ -1,0 +1,121 @@
+
+/* =============== common code starts here =============== */
+
+body{
+    background: linear-gradient(45deg, rgba(64,81,137, 0.7), rgba(64,81,137, 0.7)),
+                url("/static/images/banner.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: block;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(10px);  
+    -webkit-backdrop-filter: blur(10px);
+
+    color: var(--quaternary-color);
+
+    border-radius: 12px;
+    padding: 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    width: 100%;
+    max-width: 400px;
+
+    margin: 0 auto;
+}
+/* =============== common code ends here =============== */
+
+
+/* =============== custom input =============== *
+
+/* Form heading */
+.form-heading {
+    font-size: 1.3rem;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+}
+
+/* =============== Labels =============== */
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* =============== Inputs =============== */
+.custom-input {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    border-radius: 0%;
+}
+
+.custom-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+.custom-input:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* =============== Submit Button =============== */
+.btn-submit {
+    background-color: var(--brand-support) !important;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 6px 0;
+    border: none;
+    border-radius: 0%;
+    transition: 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #08a489 !important;
+}
+
+.description{
+    font-size: 0.9rem;
+} 
+
+.redirect-btn{
+    color:  var(--brand-support);
+    font-weight: 700;
+    transition : var(--transition);
+    text-decoration: underline;
+    font-size: 0.9rem;
+}
+
+/* =============== Responsiveness =============== */
+@media (max-width: 480px) {
+    .card{
+        padding: 20px;
+    }
+    .form-heading {
+        font-size: 1.2rem;
+    }
+    .custom-input {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+}

@@ -1,0 +1,56 @@
+
+
+{% extends 'accounts/user_authentication.html' %}
+
+{% block content %}
+
+<!-- =============== header =============== -->
+<div class="text-center mb-4">
+    <h1 class="form-heading">Login</h1>
+</div>
+
+<!-- =============== form section =============== -->
+<form action="" method="POST" class="glass-form">
+    {% csrf_token %}
+
+    <!-- Username -->
+    <div class="mb-3 form-group">
+        <label for="usename">Username</label>
+        <input type="text" name="username" id="username" class="custom-input" placeholder="Enter username..." required >
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3 form-group">
+        <label for="password">Password :</label>
+        <input type="password" name="password" id="password" class="custom-input" placeholder="Enter password..." required>
+
+        <div class="text-end">
+            <a href="{% url 'password_reset' %}" class="text-white" style="color: rgba(255, 255, 255, 0.85); font-size: 0.85rem;">Forgot Password?</a>
+        </div>
+    </div>
+
+    <!-- login btn -->
+    <div class="d-grid mt-3">
+        <button type="submit" class="btn btn-primary btn-submit">Login</button>
+    </div>
+
+</form>
+
+<!-- error messages -->
+{% if messages %}
+    {% for message in messages %}
+        <div class="text-white small mt-1 error-msg">{{message}}</div>
+    {% endfor %}
+{% endif %}
+
+
+<!-- login redirect -->
+<div class="text-center mt-3">
+    <p class="description mb-0 pb-0">Don't have an account? </p>
+    <div class="d-flex gap-3 mt-2 justify-content-center">
+        <a href="{% url 'candidate_register' %}" class=" redirect-btn">Join as Candidate</a>
+        <a href="{% url 'employer_register' %}" class=" redirect-btn">Hire a talent</a>
+    </div>
+</div>
+
+{% endblock %}
