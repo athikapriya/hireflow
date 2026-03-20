@@ -1,6 +1,8 @@
 /* =============== common code starts here =============== */
 :root{
-    --brand-color: #3D4D82;
+    --brand-color: #405189;
+    --brand-support: #0AB39C;
+
     --secondary-color :#7f8b97;
     --tertiary-color : #495057;
     --quaternary-color : #f0f0f1;
@@ -10,6 +12,8 @@
     --background-color: #F3F3F9;
 
     --border-radius : 4px;
+
+    --transition: 0.4s all;
 }
 
 html{
