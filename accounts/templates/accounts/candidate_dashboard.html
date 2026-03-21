@@ -1,7 +1,126 @@
 {% extends 'base/main.html' %}
-
 {% block content %}
 
-<h1>Candidate Dashboard</h1>
+<!-- =============== candidate dashboard starts here =============== -->
+<section id="dashboard" >
 
+    <!-- =============== section header starts =============== -->
+    <div class="section-header container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="main-heading mb-0">Dashboard</h2>
+            <div class="page-name d-flex gap-1 align-items-center">
+                <span>HireFlow</span>
+                <i class="fa-solid fa-angle-right" style="font-size: 0.65rem;"></i>
+                <a href="{% url 'employer_dashboard' %}" class="text-decoration-none">   Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <!-- =============== section header ends =============== -->
+
+    <!-- =============== dashboard card starts here =============== -->
+    <div class="dashboard-cards">
+        <div class="container-fluid ">
+
+        
+            <div class="row">
+
+                <!-- =============== applied jobs =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if applied_jobs %}
+                                            {{ applied_jobs }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Applied</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== interviewed jobs =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if interviewed_jobs %}
+                                            {{ interviewed_jobs }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Interviewed</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== job offers =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if job_offers %}
+                                            {{ job_offers }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Offers</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-eye"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== saved jobs =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if saved_jobs %}
+                                            {{ saved_jobs }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Saved</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- =============== dashboard card ends here =============== -->
+     
+</section>
+<!-- =============== candidate dashboard ends here =============== -->
 {% endblock %}

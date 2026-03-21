@@ -1,5 +1,126 @@
 {% extends 'base/main.html' %}
-{% load static %}
 {% block content %}
-<h1>Employer Dashboard</h1>
+
+<!-- ===============employer dashboard starts here =============== -->
+<section id="dashboard" >
+
+    <!-- =============== section header starts =============== -->
+    <div class="section-header container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="main-heading mb-0">Dashboard</h2>
+            <div class="page-name d-flex gap-1 align-items-center">
+                <span>HireFlow</span>
+                <i class="fa-solid fa-angle-right" style="font-size: 0.65rem;"></i>
+                <a href="{% url 'employer_dashboard' %}" class="text-decoration-none">   Dashboard</a>
+            </div>
+        </div>
+    </div>
+    <!-- =============== section header ends =============== -->
+
+    <!-- =============== dashboard card starts here =============== -->
+    <div class="dashboard-cards">
+        <div class="container-fluid ">
+
+        
+            <div class="row">
+
+                <!-- =============== total jobs =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if total_jobs %}
+                                            {{ total_jobs }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Posted Jobs</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== total applications =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if total_applications %}
+                                            {{ total_applications }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Applications</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== active jobs =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if active_jobs %}
+                                            {{ active_jobs }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Active Jobs</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-eye"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =============== shortlisted candidates =============== -->
+                <div class=" col-6 col-md-3 g-3">
+                    <div class="dashboard-card">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="d-block job-num mb-2">
+                                        {% if shortlisted_candidates %}
+                                            {{ shortlisted_cantidates }}
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </span>
+                                    <span class="card-heading">Shortlisted</span>
+                                </div>
+                                <div class="icon-box">
+                                    <i class="fa-solid fa-bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- =============== dashboard card ends here =============== -->
+
+</section>
+<!-- =============== employer dashboard ends here =============== -->
 {% endblock %}

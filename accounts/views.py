@@ -78,7 +78,10 @@ def logout_user(request):
 # =============== candidate dashboard view =============== 
 def candidate_dashboard(request):
     context = {
-
+        # applied_jobs
+        # interviewed_jobs
+        # job_offers
+        # saved_jobs
     }
     return render(request, 'accounts/candidate_dashboard.html', context)
 
@@ -87,6 +90,9 @@ def candidate_dashboard(request):
 # =============== employer dashboard view =============== 
 def employer_dashboard(request):
     context = {
-
+        # total_jobs
+        # total_applications
+        # active_jobs
+        # shortlisted_candidates
     }
     return render(request, 'accounts/employer_dashboard.html', context)

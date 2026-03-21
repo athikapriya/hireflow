@@ -205,3 +205,53 @@ footer .footer-contents{
     color: var(--secondary-color);
 }
 /* =============== footer ends here =============== */
+
+
+/* =============== dashboard starts here =============== */
+.section-header{
+  background-color: #fff;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  box-shadow: 1px 1px 5px #bed0e1;
+}
+
+#dashboard .section-header .page-name{
+  font-size: 0.8rem;
+  color: var(--secondary-color);
+}
+
+#dashboard .section-header .page-name a, #dashboard .section-header .page-name .fa-solid{
+  color: var(--tertiary-color);
+}
+
+.dashboard-card .card{
+    background: linear-gradient(135deg, #405189, #0AB39C);
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 5px #bed0e1;
+    color: #ffffff;
+    padding: 1rem;
+    transition: var(--transition);
+}
+
+.dashboard-card .card .job-num{
+    font-size: 1.1rem;
+}
+
+.dashboard-card .card .card-heading{
+    font-size: 0.95rem;
+}
+
+.dashboard-card .card .icon-box{
+    background-color: #ffffff33; 
+    border-radius: 50%;
+    padding: 0.3rem ;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-card .card .icon-box i{
+    font-size: 0.8rem;
+}
+
+/* =============== dashbord ends here =============== */
