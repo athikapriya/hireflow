@@ -1,0 +1,123 @@
+/* =============== common code starts here =============== */
+:root{
+    --brand-color: #405189;
+    --brand-support: #0AB39C;
+
+    --secondary-color :#7f8b97;
+    --tertiary-color : #495057;
+    --quaternary-color : #f0f0f1;
+
+    --navlink-color : #abb9e8;
+
+    --background-color: #F3F3F9;
+
+    --border-radius : 4px;
+
+    --transition: 0.4s all;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "Roboto", sans-serif;
+    background-color: #F3F3F9;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: "Ubuntu", sans-serif;
+}
+
+.btn:focus,
+.btn:active,
+.form-control:focus,
+.form-select:focus {
+    outline: none !important;    
+    box-shadow: none !important;    
+    background-color: transparent !important;
+    color: var(--tertiary-color);
+}
+
+.card{
+    border: none;
+}
+
+.btn{
+    border-radius: 0%;
+}
+/* =============== common code ends here =============== */
+
+
+
+/* =============== custom common class starts here =============== */
+.brand-color__background{
+    background-color: var(--brand-color);
+}
+
+.brand-color__font{
+    color: var(--brand-color);
+}
+
+.nav-link__color{
+    color: var(--navlink-color);
+}
+
+.secondary-color{
+    color: var(--secondary-color);
+}
+
+.tertiary-color{
+    color: var(--tertiary-color);
+}
+
+.quaternary-color{
+    color: var(--quaternary-color);
+}
+
+.border-radius{
+    border-radius: var(--border-radius);
+}
+
+.transition{
+    transition: var(--transition);
+}
+/* =============== custom common class ends here =============== */
+
+
+
+/* =============== navbar starts here =============== */
+nav .navbar-brand{
+    height: 32px;
+}
+
+nav img{
+    height: 100%;
+}
+
+.nav-link:hover{
+    color: var(--quaternary-color);
+}
+
+h1{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+/* =============== navbar ends here =============== */
+
+
+
+
+/* =============== footer starts here =============== */
+footer{
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .footer-contents{
+    font-size: 0.85rem; 
+    color: var(--secondary-color);
+}
+/* =============== footer ends here =============== */
