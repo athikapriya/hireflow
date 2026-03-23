@@ -32,6 +32,10 @@ body{
 
     margin: 0 auto;
 }
+
+#user-authentication .btn{
+    border-radius: 0%;
+}
 /* =============== common code ends here =============== */
 
 
