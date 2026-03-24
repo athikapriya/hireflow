@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 from .models import Job, Skill
 from .forms import JobForm
@@ -12,13 +13,16 @@ def manage_jobs(request):
     today = timezone.now().date()
 
     Job.objects.filter(deadline__lt=today, is_active=True).update(is_active=False)
+    job_list = Job.objects.all().order_by('-is_active', '-posted_at')
 
-    jobs = Job.objects.all().order_by('-is_active', '-posted_at')
+    paginator = Paginator(job_list, 10)
+    page_number = request.GET.get('page')
+    jobs = paginator.get_page(page_number)
 
     context = {
-        "page_title" : page_title,
+        "page_title": page_title,
         "jobs": jobs,
-        "today": today
+        "today": today,
     }
     return render(request, 'jobs/manage_jobs.html', context)
 

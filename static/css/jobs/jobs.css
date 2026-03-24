@@ -238,6 +238,33 @@ input[type="file"].form-control:focus {
 /* =============== job form ends =============== */
 
 
+/* =============== paginator starts =============== */
+.pagination-btn {
+    display: inline-block;
+    padding: 3px 9px;
+    margin: 2px;
+    border: 1px solid #c1c0c0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+}
+
+.pagination-btn .fa-solid{
+    font-size: 0.7rem;
+}
+
+.pagination-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination-btn.active {
+    background-color: var(--brand-color);
+    color: #fff;
+}
+/* =============== paginator ends =============== */
+
+
 @media (max-width: 768px) {
     .table td,
     .table th {

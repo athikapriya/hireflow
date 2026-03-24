@@ -167,6 +167,38 @@
                         </table>
                     </div>
 
+                    <!-- =============== paginator starts =============== -->
+                    {% if jobs.paginator.num_pages > 1 %}
+
+                        <div class="pagination-container text-center">
+
+                            <!-- Previous -->
+                            {% if jobs.has_previous %}
+                                <a href="?page={{ jobs.previous_page_number }}" class="pagination-btn" aria-label="paginator left">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </a>
+                            {% endif %}
+
+                            <!-- Page Numbers -->
+                            {% for num in jobs.paginator.page_range %}
+                                {% if jobs.number == num %}
+                                    <span class="pagination-btn active">{{ num }}</span>
+                                {% else %}
+                                    <a href="?page={{ num }}" class="pagination-btn">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            <!-- Next -->
+                            {% if jobs.has_next %}
+                                <a href="?page={{ jobs.next_page_number }}" class="pagination-btn" aria-label="paginator right">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    {% endif %}
+                    <!-- =============== paginator ends =============== -->
+
                 </div>
             </div>
         </div>
