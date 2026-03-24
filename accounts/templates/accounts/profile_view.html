@@ -1,0 +1,53 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/accounts/dashbaord.css' %}">
+<link rel="stylesheet" href="{% static 'css/jobs/jobs.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<section id="profile_view">
+    <!-- page title -->
+    {% include 'base/page_title.html' %}
+
+    <div class="container-fluid mt-3 content-section">
+        <div class="profile-card section-bg py-4 px-4">
+
+            <div class="row align-items-center">
+
+                <!-- Profile Image -->
+                <div class="col-12 text-center">
+                    {% if user.profile_image %}
+                    <img src="{{ user.profile_image.url }}" class="img-fluid rounded-circle mb-3" alt="Profile Image" style="max-width: 150px;">
+                     
+                    {% else %}
+                        <img src="{% static 'images/profile.svg' %}" class="img-fluid rounded-circle mb-3" alt="Profile Image" style="max-width: 150px;">
+                    {% endif %}
+                </div>
+
+                <!-- User Info -->
+                <div class="col-12 text-center" style="color: #676666;">
+                    <h4 class="mb-3">{{ user.username }}</h4>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Role:</strong> {{ user.role|capfirst }}</p>
+                    {% if user.designation %}
+                        <p><strong>Designation:</strong> {{ user.designation }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Edit Button -->
+                <div class="col-12 text-center">
+                    {% if user.role == 'candidate' %}
+                        <a href="{% url 'candidate_profile' %}" class="btn btn-primary mybtn">Edit Profile</a>
+                    {% elif user.role == 'employer' %}
+                        <a href="{% url 'employer_profile' %}" class="btn btn-primary mybtn">Edit Profile</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

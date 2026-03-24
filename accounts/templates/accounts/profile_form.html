@@ -1,0 +1,71 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/accounts/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/jobs/jobs.css' %}">
+{% endblock %}
+
+{% block content %}
+<section id="profile_form">
+    
+    <!-- page title -->
+    {% include 'base/page_title.html' %}
+
+    <!-- main section -->
+    <div class="container-fluid mt-3 content-section">
+        <div class="profile-form section-bg py-2">
+            <div class="mx-3">
+
+                <div class="main-section__header">
+                    <h3 class="main-heading ms-2 mb-0">{{ page_title }}</h3>
+                </div>
+
+                <div class="main-section__body mt-3">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="row g-4">
+
+                            <!-- username -->
+                            <div class="col-sm-6">
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                            </div>
+
+                            <!-- email -->
+                            <div class="col-sm-6">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                            </div>
+
+                            <!-- designation -->
+                            <div class="col-sm-6">
+                                {{ form.designation.label_tag }}
+                                {{ form.designation }}
+                            </div>
+
+                            <!-- profile image -->
+                            <div class="col-sm-6">
+                                {{ form.profile_image.label_tag }}
+                                {{ form.profile_image }}
+                            </div>
+
+                            <!-- submit button -->
+                            <div class="d-flex justify-content-end gap-3 my-3">
+                                
+                                <a href="{% url 'profile_view' %}" class="btn btn-warning">Cancel</a>
+                                
+                                <button type="submit" class="btn btn-submit">Save Changes</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}
