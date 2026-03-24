@@ -109,3 +109,47 @@ def restore_job(request, pk):
     job.save()
 
     return redirect("manage_jobs")
+
+
+
+# =============== browse jobs view =============== 
+from django.core.paginator import Paginator
+
+def browse_jobs(request):
+    page_title = "Browse Jobs"
+
+    jobs = Job.objects.all().order_by('-is_active', '-updated_at')
+
+    query = request.GET.get('q', '')                
+    employment_type = request.GET.get('employment_type', '')  
+    status = request.GET.get('status', '')          
+
+    if query:
+        jobs = jobs.filter(title__icontains=query)
+
+    if employment_type:
+        jobs = jobs.filter(employment_type=employment_type)
+
+    if status:
+        if status == "active":
+            jobs = jobs.filter(is_active=True)
+        elif status == "closed":
+            jobs = jobs.filter(is_active=False)
+
+    total_jobs_filtered = jobs.count()
+    total_jobs_all = Job.objects.count()
+
+    paginator = Paginator(jobs, 8)
+    page_number = request.GET.get('page')
+    jobs_page = paginator.get_page(page_number)
+
+    context = {
+        "page_title" : page_title,
+        "jobs": jobs_page, 
+        "query": query,
+        "employment_type": employment_type,
+        "status": status,
+        "total_jobs_filtered": total_jobs_filtered,
+        "total_jobs_all": total_jobs_all,
+    }
+    return render(request, 'jobs/browse_jobs.html', context)
