@@ -4,9 +4,9 @@ from django.core.paginator import Paginator
 
 from .models import Job, Skill
 from .forms import JobForm
+from applications.models import Application
 
 
-# =============== manage Jobs view =============== 
 # =============== manage Jobs view =============== 
 def manage_jobs(request):
     page_title = "Manage Jobs"
@@ -138,8 +138,6 @@ def restore_job(request, pk):
 
 
 # =============== browse jobs view =============== 
-from django.core.paginator import Paginator
-
 def browse_jobs(request):
     page_title = "Browse Jobs"
 
@@ -161,10 +159,15 @@ def browse_jobs(request):
         elif status == "closed":
             jobs = jobs.filter(is_active=False)
 
+    if request.user.is_authenticated:
+        applied_job_ids = list(
+            request.user.applications.values_list('job_id', flat=True)
+        )
+
     total_jobs_filtered = jobs.count()
     total_jobs_all = Job.objects.count()
 
-    paginator = Paginator(jobs, 8)
+    paginator = Paginator(jobs, 6)
     page_number = request.GET.get('page')
     jobs_page = paginator.get_page(page_number)
 
@@ -176,6 +179,7 @@ def browse_jobs(request):
         "status": status,
         "total_jobs_filtered": total_jobs_filtered,
         "total_jobs_all": total_jobs_all,
+        "applied_job_ids": applied_job_ids,
     }
     return render(request, 'jobs/browse_jobs.html', context)
 
@@ -183,10 +187,18 @@ def browse_jobs(request):
 
 # =============== job overview view =============== 
 def job_details(request, pk):
-
     job = get_object_or_404(Job, id=pk)
 
+    has_applied = False
+
+    if request.user.is_authenticated:
+        has_applied = Application.objects.filter(
+            job=job,
+            candidate=request.user
+        ).exists()
+
     context = {
-        "job": job
+        "job": job,
+        "has_applied": has_applied,
     }
     return render(request, 'jobs/job_details.html', context)
