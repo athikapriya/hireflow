@@ -4,6 +4,7 @@ from django.contrib import messages
 
 
 from .forms import CandidateRegisterForm, EmployerRegisterForm
+from applications.models import Application
 from jobs.models import Job
 
 
@@ -89,15 +90,20 @@ def employer_dashboard(request):
 
     latest_jobs = jobs[:6]
 
+    total_applications = Application.objects.filter(job__in=jobs).count()
+
+    total_hired = Application.objects.filter(job__in=jobs, status="accepted").count()
+
     context = {
-        "jobs" : latest_jobs,
-        'total_applications': 0,
-        # 'shortlisted_candidates': 0,
+        "jobs": latest_jobs,
         "total_jobs": total_jobs,
         "active_jobs": active_jobs,
-        "closed_jobs" : closed_jobs,
-        "page_title" : page_title
+        "closed_jobs": closed_jobs,
+        "total_applications": total_applications,
+        "total_hired": total_hired,
+        "page_title": page_title,
     }
+
     return render(request, 'accounts/employer_dashboard.html', context)
 
 
@@ -105,12 +111,17 @@ def employer_dashboard(request):
 def candidate_dashboard(request):
     page_title = "Dashboard"
 
+    total_applied = Application.objects.filter(candidate=request.user).count()
+    total_accepted = Application.objects.filter(candidate=request.user, status="accepted").count()
+    total_pending = Application.objects.filter(candidate=request.user, status="pending").count()
+    total_rejected = Application.objects.filter(candidate=request.user, status="rejected").count()
+
     context = {
-        # Example placeholders:
-        # 'applied_jobs': 0,
-        # 'interviewed_jobs': 0,
-        # 'job_offers': 0,
-        # 'saved_jobs': 0,
-        "page_title" : page_title
+        "page_title": page_title,
+        "total_applied": total_applied,
+        "total_accepted": total_accepted,
+        "total_pending": total_pending,
+        "total_rejected": total_rejected,
     }
+
     return render(request, 'accounts/candidate_dashboard.html', context)

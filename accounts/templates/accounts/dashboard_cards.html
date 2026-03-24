@@ -6,7 +6,7 @@
             <div class="row">
                 
                 <!-- =============== total jobs =============== -->
-                <div class=" col-6 col-lg-3 g-3">
+                <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
                             <div class="d-flex justify-content-between align-items-center">
@@ -14,29 +14,26 @@
 
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.role == 'employer' %}
-                                            <span class="d-block job-num mb-2">
+                                            <h3 class="card-heading">Posted Jobs</h3>
+                                            <span class="d-block job-num">
                                                 {% if total_jobs %}
                                                     {{ total_jobs }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Posted Jobs</span>
                                         {% else %}
-                                            <span class="d-block job-num mb-2">
-                                                {% if applied_jobs %}
-                                                    {{ applied_jobs }}
+                                            <h3 class="card-heading">Applied Jobs</h3>
+                                            <span class="d-block job-num">
+                                                {% if total_applied %}
+                                                    {{ total_applied }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Applied Jobs</span>
                                         {% endif %}
                                     {% endif %}
 
-                                </div>
-                                <div class="icon-box rounded-circle d-inline-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-briefcase"></i>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +41,7 @@
                 </div>
 
                 <!-- =============== total applications =============== -->
-                <div class=" col-6 col-lg-3 g-3">
+                <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
                             <div class="d-flex justify-content-between align-items-center">
@@ -52,29 +49,26 @@
 
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.role == 'employer' %}
-                                            <span class="d-block job-num mb-2">
+                                            <h3 class="card-heading">Applications</h3>
+                                            <span class="d-block job-num">
                                                 {% if total_applications %}
                                                     {{ total_applications }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Applications</span>
                                         {% else %}
-                                            <span class="d-block job-num mb-2">
-                                                {% if interviewed_jobs %}
-                                                    {{ interviewed_jobs }}
+                                            <h3 class="card-heading">Accepted</h3>
+                                            <span class="d-block job-num">
+                                                {% if total_accepted %}
+                                                    {{ total_accepted }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Interviewed</span>
                                         {% endif %}
                                     {% endif %}
 
-                                </div>
-                                <div class="icon-box rounded-circle d-inline-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-file-pdf"></i>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +76,7 @@
                 </div>
 
                 <!-- =============== active jobs =============== -->
-                <div class=" col-6 col-lg-3 g-3">
+                <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
                             <div class="d-flex justify-content-between align-items-center">
@@ -90,37 +84,34 @@
 
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.role == 'employer' %}
-                                            <span class="d-block job-num mb-2">
+                                            <h3 class="card-heading">Active Jobs</h3>
+                                            <span class="d-block job-num ">
                                                 {% if active_jobs %}
                                                     {{ active_jobs }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Active Jobs</span>
                                         {% else %}
-                                            <span class="d-block job-num mb-2">
-                                                {% if job_offers %}
-                                                    {{ job_offers }}
+                                            <h3 class="card-heading">Pending Jobs</h3>
+                                            <span class="d-block job-num">
+                                                {% if total_pending %}
+                                                    {{ total_pending }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Offers</span>
                                         {% endif %}
                                     {% endif %}
                         
-                                </div>
-                                <div class="icon-box rounded-circle d-inline-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-eye"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- =============== shortlisted candidates =============== -->
-                <div class=" col-6 col-lg-3 g-3">
+                <!-- =============== hires =============== -->
+                <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
                             <div class="d-flex justify-content-between align-items-center">
@@ -128,28 +119,25 @@
 
                                     {% if request.user.is_authenticated %}
                                         {% if request.user.role == 'employer' %}
-                                            <span class="d-block job-num mb-2">
-                                                {% if shortlisted_candidates %}
-                                                    {{ shortlisted_cantidates }}
+                                            <h3 class="card-heading">Hired </h3>
+                                            <span class="d-block job-num">
+                                                {% if total_hired %}
+                                                    {{ total_hired }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Shortlisted</span>
                                         {% else %}
-                                            <span class="d-block job-num mb-2">
-                                                {% if saved_jobs %}
-                                                    {{ saved_jobs }}
+                                            <h3 class="card-heading">Rejected</h3>
+                                            <span class="d-block job-num">
+                                                {% if total_rejected %}
+                                                    {{ total_rejected }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                            <span class="card-heading">Saved Jobs</span>
                                         {% endif %}
                                     {% endif %}
-                                </div>
-                                <div class="icon-box rounded-circle d-inline-flex align-items-center justify-content-center">
-                                    <i class="fa-solid fa-bookmark"></i>
                                 </div>
                             </div>
                         </div>
