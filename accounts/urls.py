@@ -34,4 +34,11 @@ urlpatterns = [
     path("employer_dashboard/", views.employer_dashboard, name="employer_dashboard"),
     path("candidate_dashboard/", views.candidate_dashboard, name="candidate_dashboard"),
 
+    # =============== profile url =============== 
+    path('profile/', views.profile_view, name='profile_view'),
+
+    # =============== profile settings urls =============== 
+    path('candidate/profile/settings/', views.candidate_profileSettings, name='candidate_profile'),
+    path('employer/profile/settings/', views.employer_profileSettings, name='employer_profile'),
+
 ]
