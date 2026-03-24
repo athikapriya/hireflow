@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 
-from .forms import CandidateRegisterForm, EmployerRegisterForm
+from .forms import CandidateRegisterForm, EmployerRegisterForm, CandidateProfileForm, EmployerProfileForm
 from applications.models import Application
 from jobs.models import Job
 
@@ -130,3 +130,54 @@ def candidate_dashboard(request):
     }
 
     return render(request, 'accounts/candidate_dashboard.html', context)
+
+
+# =============== profile view =============== 
+def profile_view(request):
+    user = request.user
+    page_title = "My Profile"
+
+    context = {
+        "page_title": page_title,
+        "user": user,
+    }
+    return render(request, 'accounts/profile_view.html', context)
+
+
+# =============== employer profile settings view =============== 
+def employer_profileSettings(request):
+    page_title = "Profile Settings"
+
+    if request.method == "POST":
+        form = EmployerProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_view')
+    else:
+        form = EmployerProfileForm(instance=request.user)
+
+    context = {
+        "page_title": page_title,
+        "form": form,
+    }
+    return render(request, 'accounts/profile_form.html', context)
+
+
+
+# =============== candidate profile settings view =============== 
+def candidate_profileSettings(request):
+    page_title = "Profile Settings"
+
+    if request.method == "POST":
+        form = CandidateProfileForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_view')
+    else:
+        form = CandidateProfileForm(instance=request.user)
+
+    context = {
+        "page_title": page_title,
+        "form": form,
+    }
+    return render(request, 'accounts/profile_form.html', context)
