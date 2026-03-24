@@ -1,0 +1,191 @@
+
+{% extends 'base/main.html' %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/jobs/jobs.css' %}">
+<link rel="stylesheet" href="{% static 'css/accounts/dashboard.css' %}">
+{% endblock %}
+
+<!-- =============== browse jobs starts here =============== -->
+{% block content %}
+
+<section id="browse_jobs">
+
+    <!-- page title -->
+    {% include 'base/page_title.html' %}
+
+     <!-- =============== main section starts here =============== -->
+    <div class="container-fluid my-3 content-section">
+
+        <div class="filter-section section-bg py-3">
+            <div class="mx-3">
+                <form method="get" class="row g-2">
+
+                    <!-- Job title search -->
+                    <div class="col-sm-4">
+                        <input type="text" name="q" class="form-control" placeholder="Search by job title" value="{{ query }}">
+                    </div>
+
+                    <!-- Employment type filter -->
+                    <div class="col-6 col-sm-4 col-md-3">
+                        <select name="employment_type" class="form-select">
+                            <option value="">All Employment Types</option>
+                            <option value="FT" {% if employment_type == "FT" %}selected{% endif %}>Full-time</option>
+                            <option value="PT" {% if employment_type == "PT" %}selected{% endif %}>Part-time</option>
+                            <option value="CT" {% if employment_type == "CT" %}selected{% endif %}>Contract</option>
+                            <option value="IN" {% if employment_type == "IN" %}selected{% endif %}>Internship</option>
+                            <option value="FL" {% if employment_type == "FL" %}selected{% endif %}>Freelance</option>
+                        </select>
+                    </div>
+
+                    <!-- Status filter -->
+                    <div class="col-6 col-sm-2 col-md-3">
+                        <select name="status" class="form-select">
+                            <option value="">All Status</option>
+                            <option value="active" {% if status == "active" %}selected{% endif %}>Active</option>
+                            <option value="closed" {% if status == "closed" %}selected{% endif %}>Closed</option>
+                        </select>
+                    </div>
+
+                    <!-- Submit button -->
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary w-100 mybtn d-flex gap-2 justify-content-center align-items-center">
+                            <i class="fa-solid fa-sliders"></i>
+                            <span>Filter</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- =============== filter ends =============== -->
+
+        <!-- =============== Job list starts =============== -->
+        <div class="jobs-card mt-4">
+
+            <div class="row">
+                <div class="main-section__header secondary-color " style="font-size: 14px; border: none;">
+                    Results: 
+                    <span class="fw-medium">
+                        {{ total_jobs_filtered }}
+                        {% if total_jobs_all != total_jobs_filtered %}
+                            (from {{ total_jobs_all }} total)
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for job in jobs %}
+                    <div class="col-md-3 g-4">
+                        <div class="card card-body p-3">
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <!-- logo -->
+                                <div class="logo-box text-center">
+                                    {% if job.company_logo %}
+                                        <img src="{{ job.company_logo.url }}" alt="Logo" class="company-logo h-100 w-100">
+                                    {% else %}
+                                        <img src="{% static 'images/default_logo.png' %}" alt="Logo" class="company-logo w-100 h-100">
+                                    {% endif %}
+                                </div>
+
+                                <!-- saved job -->
+                                <div class="saved-job__icon d-inline-flex align-items-center justify-content-center transition">
+                                    <i class="fa-solid fa-bookmark"></i>
+                                </div>
+
+                            </div>
+
+                            <div class="job-name mt-3 ">
+                                <h4 class="main-heading" style="font-size: 0.9rem;">{{job.title}}</h4>
+                                <h5 class="secondary-color font-normal" style="font-size: 0.8rem;">{{job.company_name}}</h5>
+                            </div>
+
+                            <div class="location-and__deadline d-flex justify-content-between mt-2 " style="font-size: 12px; color: #585757;">
+                                <div class="-d-flex gap-3 align-items-center">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>{{job.location}}</span>
+                                </div>
+
+                                <div class="-d-flex gap-3 align-items-center">
+                                        {% if job.deadline %}
+                                            <i class="fa-solid fa-clock"></i>
+                                            <span>{{ job.deadline }}</span>
+                                        {% else %}
+                                            
+                                        {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="job-description lh-base my-2">
+                                {{job.description}}
+                            </div>
+
+                            <div class="job-type mt-2 mb-4">
+                                <span class="badge-custom py-1 px-2 rounded-4 
+                                    {% if job.employment_type == 'FT' %}badge-ft
+                                    {% elif job.employment_type == 'PT' %}badge-pt
+                                    {% elif job.employment_type == 'CT' %}badge-ct
+                                    {% elif job.employment_type == 'IN' %}badge-in
+                                    {% elif job.employment_type == 'FL' %}badge-fl
+                                    {% endif %}">
+                                    {{ job.get_employment_type_display }}
+                                </span>
+                            </div>
+
+                            <div class="job-btn d-flex justify-content-center align-items-center gap-3">
+                                <a href="#" class="text-decoration-none apply-btn btn">Apply Job</a>
+                                <a href="#" class="text-decoration-none overview-btn btn">Overview</a>
+                            </div>
+
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% if jobs.paginator.num_pages > 1 %}
+
+                    <div class="pagination-container mt-3 d-flex justify-content-center gap-2">
+
+                        <!-- Previous -->
+                        {% if jobs.has_previous %}
+                            <a href="?page={{ jobs.previous_page_number }}&q={{ query }}&employment_type={{ employment_type }}&status={{ status }}" class="pagination-btn">
+                                «
+                            </a>
+                        {% endif %}
+
+                        <!-- Page numbers -->
+                        {% for num in jobs.paginator.page_range %}
+                            {% if jobs.number == num %}
+                                <span class="pagination-btn active">{{ num }}</span>
+                            {% else %}
+                                <a href="?page={{ num }}&q={{ query }}&employment_type={{ employment_type }}&status={{ status }}" class="pagination-btn">
+                                    {{ num }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- Next -->
+                        {% if jobs.has_next %}
+                            <a href="?page={{ jobs.next_page_number }}&q={{ query }}&employment_type={{ employment_type }}&status={{ status }}" class="pagination-btn">
+                                »
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                    {% endif %}
+
+            </div>
+        </div>
+        <!-- =============== job list ends =============== -->
+
+    </div>
+    
+</section>
+
+{% endblock %}
+<!-- =============== browse jobs ends here =============== -->

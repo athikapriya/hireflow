@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6{
     font-family: "Ubuntu", sans-serif;
 }
 
-.form-control, .btn-submit, .btn-warning{
+.form-control, .btn-submit, .btn-warning, .form-select{
     border-radius: 0%;
 }
 
@@ -60,6 +60,7 @@ h1, h2, h3, h4, h5, h6{
     color: var(--quaternary-color);
     font-size: 0.88rem;
     transition: var(--transition);
+    border-radius: 0%;
 }
 
 .mybtn i{
@@ -68,6 +69,10 @@ h1, h2, h3, h4, h5, h6{
 
 .mybtn:hover{
     background-color: var(--brand-support);
+}
+
+.form-select{
+    padding: 8px 14px;
 }
 
 .content-section{

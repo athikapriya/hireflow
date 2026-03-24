@@ -32,3 +32,67 @@
         order: 1;
     }
 }
+
+/* =============== browse jobs starts =============== */
+#browse_jobs .card{
+    box-shadow: 1px 1px 5px #bed0e1;
+}
+
+#browse_jobs .logo-box{
+    background-color: rgba(64, 81, 137, 0.2);
+}
+
+.saved-job__icon {
+    padding: 7px;
+    border-radius: 3px;
+    background-color: rgba(64, 81, 137, 0.15);
+    cursor: pointer;
+}
+
+.saved-job__icon i {
+    color: #405189;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.saved-job__icon:hover {
+    background-color: #405189;
+}
+
+.saved-job__icon:hover i {
+    color: var(--quaternary-color);
+}
+
+.job-description{
+    font-size: 0.88rem;
+    color: var(--secondary-color)
+}
+
+.job-btn .btn{
+    display: inline-block;
+    padding: 6px 25px;
+    border-radius: 0%;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.job-btn .apply-btn{
+    background-color: rgba(64, 81, 137, 0.2);
+    color: var(--brand-color);
+}
+
+.job-btn .apply-btn:hover{
+    background-color: var(--brand-color);
+    color: var(--quaternary-color);
+}
+
+.job-btn .overview-btn{
+    background-color: rgba(10, 179, 156, 0.15);
+    color: var(--brand-support);
+}
+
+.job-btn .overview-btn:hover{
+    background-color: var(--brand-support);
+    color: var(--quaternary-color);
+}
+/* =============== browse job ends =============== */
