@@ -91,17 +91,21 @@
 {% block script %}
 <script>
     const data = {
-        labels: ['Active Jobs', 'Closed Jobs', 'Applications'],
+        labels: ['Total Jobs', 'Active Jobs', 'Closed Jobs', 'Applications', 'Hired'],
         datasets: [{
             data: [
+                {{ total_jobs|default:0 }},
                 {{ active_jobs|default:0 }},
                 {{ closed_jobs|default:0 }},
-                {{ total_applications|default:0 }}
+                {{ total_applications|default:0 }},
+                {{ total_hired|default:0 }}
             ],
             backgroundColor: [
-                '#0AB39C',  
-                '#E83A60', 
-                '#059AFE'  
+                '#059BFF',  // Total Jobs
+                '#22CFCF',  // Active Jobs
+                '#FF4069',  // Closed Jobs
+                '#405189',  // Applications
+                '#FFC234'   // Hired
             ],
             borderWidth: 1
         }]
@@ -112,12 +116,6 @@
         data: data,
         options: {
             responsive: true,
-            animation: {
-                animateRotate: true,    
-                animateScale: true,     
-                duration: 1200,           
-                easing: 'easeOutBounce'
-            },
             plugins: {
                 legend: {
                     position: 'top',
@@ -127,7 +125,7 @@
                     text: 'Jobs & Applications Overview'
                 }
             }
-        },
+        }
     };
 
     const ctx = document.getElementById('jobChart');
