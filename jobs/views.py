@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from .models import Job, Skill
 from .forms import JobForm
 from applications.models import Application
+from accounts.decorators import candidate_required, employer_required
 
 
 # =============== manage Jobs view =============== 
+@login_required(login_url="login")
+@employer_required
 def manage_jobs(request):
     page_title = "Manage Jobs"
     today = timezone.now().date()
@@ -54,6 +58,8 @@ def manage_jobs(request):
 
 
 # =============== create job view =============== 
+@login_required(login_url="login")
+@employer_required
 def create_job(request):
     page_title = "Create Job"
 
@@ -83,6 +89,8 @@ def create_job(request):
 
 
 # =============== Edit Job ===============
+@login_required(login_url="login")
+@employer_required
 def edit_job(request, pk):
     page_title = "Edit Job"
 
@@ -117,6 +125,8 @@ def edit_job(request, pk):
 
 
 # =============== Delete Job ===============
+@login_required(login_url="login")
+@employer_required
 def delete_job(request, pk):
     job = get_object_or_404(Job, id=pk, employer=request.user)
 
@@ -127,6 +137,8 @@ def delete_job(request, pk):
 
 
 # =============== Restore Job ===============
+@login_required(login_url="login")
+@employer_required
 def restore_job(request, pk):
     job = get_object_or_404(Job, id=pk, employer=request.user)
 
@@ -138,6 +150,8 @@ def restore_job(request, pk):
 
 
 # =============== browse jobs view =============== 
+@login_required(login_url="login")
+@candidate_required
 def browse_jobs(request):
     page_title = "Browse Jobs"
 
@@ -186,6 +200,8 @@ def browse_jobs(request):
 
 
 # =============== job overview view =============== 
+@login_required(login_url="login")
+@candidate_required
 def job_details(request, pk):
     job = get_object_or_404(Job, id=pk)
 

@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from .models import Application
 from jobs.models import Job
 from .forms import ApplicationForm
+from accounts.decorators import candidate_required, employer_required
 
 
 # =============== apply job view =============== 
+@login_required(login_url="login")
+@candidate_required
 def apply_job(request, job_id):
     page_title = "Apply Job"
     job = get_object_or_404(Job, id=job_id)
@@ -34,6 +38,8 @@ def apply_job(request, job_id):
 
 
 # =============== Applied jobs =============== 
+@login_required(login_url="login")
+@candidate_required
 def applied_jobs(request):
     page_title = "Applied Jobs"
 
@@ -50,6 +56,8 @@ def applied_jobs(request):
 
 
 # =============== employer applications view =============== 
+@login_required(login_url="login")
+@employer_required
 def employer_applications(request):
     page_title = "Applications"
 
@@ -68,6 +76,8 @@ def employer_applications(request):
 
 
 # =============== accept application view =============== 
+@login_required(login_url="login")
+@employer_required
 def accept_application(request, app_id):
     application = get_object_or_404(Application, id=app_id, job__employer=request.user)
     application.status = "accepted"
@@ -76,6 +86,8 @@ def accept_application(request, app_id):
 
 
 # =============== reject application view =============== 
+@login_required(login_url="login")
+@employer_required
 def reject_application(request, app_id):
     application = get_object_or_404(Application, id=app_id, job__employer=request.user)
     application.status = "rejected"

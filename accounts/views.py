@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
 from .forms import CandidateRegisterForm, EmployerRegisterForm, CandidateProfileForm, EmployerProfileForm
 from applications.models import Application
 from jobs.models import Job
-
+from .decorators import candidate_required, employer_required
 
 
 # =============== employer register view =============== 
@@ -79,6 +80,8 @@ def logout_user(request):
 
 
 # =============== employer dashboard view ===============
+@login_required(login_url="login")
+@employer_required
 def employer_dashboard(request):
     page_title = "Dashboard"
 
@@ -108,6 +111,8 @@ def employer_dashboard(request):
 
 
 # =============== candidate dashboard view ===============
+@login_required(login_url="login")
+@candidate_required
 def candidate_dashboard(request):
     page_title = "Dashboard"
 
@@ -133,6 +138,7 @@ def candidate_dashboard(request):
 
 
 # =============== profile view =============== 
+@login_required(login_url="login")
 def profile_view(request):
     user = request.user
     page_title = "My Profile"
@@ -145,6 +151,8 @@ def profile_view(request):
 
 
 # =============== employer profile settings view =============== 
+@login_required(login_url="login")
+@employer_required
 def employer_profileSettings(request):
     page_title = "Profile Settings"
 
@@ -165,6 +173,8 @@ def employer_profileSettings(request):
 
 
 # =============== candidate profile settings view =============== 
+@login_required(login_url="login")
+@candidate_required
 def candidate_profileSettings(request):
     page_title = "Profile Settings"
 
