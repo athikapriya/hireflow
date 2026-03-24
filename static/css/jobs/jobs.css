@@ -32,7 +32,7 @@ table tr{
 
 .table td,
 .table th {
-    padding:  0.4rem 0.6rem;
+    padding: 0.6rem !important;
 }
 
 /* =============== company name and logo starts here =============== */

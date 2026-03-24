@@ -22,3 +22,13 @@
 .dashboard-card .card .icon-box i{
     font-size: 0.9rem;
 }
+
+@media screen and (max-width: 992px) {
+    .applications{
+        order: 2;
+    }
+
+    .chart{
+        order: 1;
+    }
+}

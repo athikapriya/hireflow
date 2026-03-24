@@ -81,17 +81,21 @@ def logout_user(request):
 def employer_dashboard(request):
     page_title = "Dashboard"
 
-    jobs = Job.objects.filter(employer=request.user)
+    jobs = Job.objects.filter(employer=request.user).order_by('-updated_at')
 
     total_jobs = jobs.count()
     active_jobs = jobs.filter(is_active=True).count()
+    closed_jobs = jobs.filter(is_active=False).count()
+
+    latest_jobs = jobs[:6]
 
     context = {
-        # Example placeholders:
-        # 'total_applications': 0,
+        "jobs" : latest_jobs,
+        'total_applications': 0,
         # 'shortlisted_candidates': 0,
         "total_jobs": total_jobs,
         "active_jobs": active_jobs,
+        "closed_jobs" : closed_jobs,
         "page_title" : page_title
     }
     return render(request, 'accounts/employer_dashboard.html', context)

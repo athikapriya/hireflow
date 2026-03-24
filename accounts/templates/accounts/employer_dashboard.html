@@ -4,6 +4,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/accounts/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/jobs/jobs.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -15,6 +16,121 @@
     <!-- dashboard card -->
     {% include 'accounts/dashboard_cards.html' %}
 
+    <div class="container-fluid content-section">
+        <div class="row">
+
+            <!-- =============== applications =============== -->
+            <div class="col-lg-7 col-xl-8 g-4 applications">
+                
+             <div class="section-bg py-3 ">
+                <div class="mx-3">
+                        
+                    <div class="main-section__header">
+                        <h3 class="main-heading ms-2 mb-0">Recent Jobs</h3>
+                    </div>
+
+                    <div class="main-section__body mt-3">
+                        <div class="table-responsive">
+
+                            <table class="table table-sm align-middle table-nowrap table-hover">
+                                <thead class="table-secondary">
+                                    <th>Job Title</th>
+                                    <th>Status</th>
+                                    <th>Applications</th>
+                                    <th>Deadline</th>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        {% for job in jobs %}
+                                            <td>{{ job.title }}</td>
+                                            <td>
+                                                {% if job.is_active %}
+                                                    <span class="status-badge status-active">Active</span>
+                                                {% else %}
+                                                    <span class="status-badge status-closed">Closed</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>application</td>
+                                            <td>
+                                                {% if job.deadline %}
+                                                    {{ job.deadline }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            </div>
+
+            <!-- =============== chart =============== -->
+            <div class="col-lg-5 col-xl-4 g-4 chart">
+                <div class="section-bg py-3">
+                    <canvas id="jobChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+    const data = {
+        labels: ['Active Jobs', 'Closed Jobs', 'Applications'],
+        datasets: [{
+            data: [
+                {{ active_jobs|default:0 }},
+                {{ closed_jobs|default:0 }},
+                {{ total_applications|default:0 }}
+            ],
+            backgroundColor: [
+                '#0AB39C',  
+                '#E83A60', 
+                '#059AFE'  
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+            responsive: true,
+            animation: {
+                animateRotate: true,    
+                animateScale: true,     
+                duration: 1200,           
+                easing: 'easeOutBounce'
+            },
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Jobs & Applications Overview'
+                }
+            }
+        },
+    };
+
+    const ctx = document.getElementById('jobChart');
+    new Chart(ctx, config);
+</script>
 {% endblock %}
