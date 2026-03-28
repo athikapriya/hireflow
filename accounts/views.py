@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Count
 
 
 from .forms import CandidateRegisterForm, EmployerRegisterForm, CandidateProfileForm, EmployerProfileForm
@@ -85,7 +86,9 @@ def logout_user(request):
 def employer_dashboard(request):
     page_title = "Dashboard"
 
-    jobs = Job.objects.filter(employer=request.user).order_by('-updated_at')
+    jobs = Job.objects.filter(employer=request.user) \
+        .annotate(application_count=Count('applications')) \
+        .order_by('-updated_at')
 
     total_jobs = jobs.count()
     active_jobs = jobs.filter(is_active=True).count()

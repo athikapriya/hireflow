@@ -36,7 +36,7 @@
                                 <thead class="table-secondary">
                                     <th>Job Title</th>
                                     <th>Status</th>
-                                    <th>Applications</th>
+                                    <th class="text-center">Applications</th>
                                     <th>Deadline</th>
                                 </thead>
 
@@ -51,7 +51,7 @@
                                                     <span class="status-badge status-closed">Closed</span>
                                                 {% endif %}
                                             </td>
-                                            <td>application</td>
+                                            <td class="text-center">{{ job.application_count }}</td>
                                             <td>
                                                 {% if job.deadline %}
                                                     {{ job.deadline }}
