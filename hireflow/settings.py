@@ -31,7 +31,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Allowed hosts
-ALLOWED_HOSTS = ["hireflow-v6q3.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["hireflow-yt6m.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
