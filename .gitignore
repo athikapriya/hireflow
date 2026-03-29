@@ -27,7 +27,6 @@ package-lock.json
 
 # Django
 staticfiles/
-media/
 logs/
 *.log
 
@@ -35,7 +34,3 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
-
-
-# settings
-hireflow/settings.py
