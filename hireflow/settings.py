@@ -162,6 +162,8 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+CLOUDINARY_STORAGE['RESOURCE_TYPE'] = 'auto'
+
 
 # =============== SMTP Configuration =============== 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
