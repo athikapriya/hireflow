@@ -9,50 +9,50 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
+# Media and Cloudinary configuration
+from logging import config
+from re import DEBUG
+
 import cloudinary
+import cloudinary_storage
 from pathlib import Path
 import os
-from decouple import config
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+# Cloudinary credentials
+cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+api_key = os.getenv('CLOUDINARY_API_KEY')
+api_secret = os.getenv('CLOUDINARY_API_SECRET')
 
-# Media settings
+if not cloud_name or not api_key or not api_secret:
+    raise Exception("Cloudinary credentials missing")
+
+cloudinary.config(
+    cloud_name=cloud_name,
+    api_key=api_key,
+    api_secret=api_secret,
+)
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': cloud_name,
+    'API_KEY': api_key,
+    'API_SECRET': api_secret,
+    'RESOURCE_TYPE': 'auto',
+}
+
+# Always save uploaded files to Cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# For development
 if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 else:
     MEDIA_URL = None
     MEDIA_ROOT = None
-
-    # Cloudinary credentials
-    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
-    api_key = os.getenv('CLOUDINARY_API_KEY')
-    api_secret = os.getenv('CLOUDINARY_API_SECRET')
-
-    if not cloud_name or not api_key or not api_secret:
-        raise Exception("Cloudinary credentials missing")
-
-    import cloudinary_storage
-    import cloudinary
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': cloud_name,
-        'API_KEY': api_key,
-        'API_SECRET': api_secret,
-        'RESOURCE_TYPE': 'auto',
-    }
-
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-    cloudinary.config(
-        cloud_name=cloud_name,
-        api_key=api_key,
-        api_secret=api_secret,
-    )
 
 
 # Quick-start development settings - unsuitable for production
