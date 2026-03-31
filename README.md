@@ -7,7 +7,7 @@
 
 This project demonstrates backend engineering concepts such as **authentication, role-based access control, REST API design, media handling, and production deployment.**
 
-    > ⚡ Minimal design ensures focus on functionality and portfolio showcase, rather than a production-level system.
+> ⚡ Minimal design ensures focus on functionality and portfolio showcase, rather than a production-level system.
 
 ### Features
 #### User Authentication & Access
@@ -79,7 +79,7 @@ This project demonstrates backend engineering concepts such as **authentication,
 | GET   | `/users/<id>/` | Get user details | No    |
 | POST  | `/auth/token/`    |   Obtain auth token   | No    |
 
-    > ⚠ Access is role-restricted. Employers cannot apply for jobs; candidates cannot manage jobs.
+> ⚠ Access is role-restricted. Employers cannot apply for jobs; candidates cannot manage jobs.
 
 
 
@@ -131,16 +131,16 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-#### Usage
+### Usage
 - Use Postman or your front-end client to interact with the API endpoints.
 - Upload resumes through Cloudinary automatically when applying for jobs.
 - Filter and paginate job listings via query parameters for cleaner browsing.
 
 
-#### Notes
+### Notes
 - This project is minimal and primarily built for portfolio demonstration.
 - Role-based API access ensures security between employer and candidate functionalities.
 - Designed to be extendable for future features like email notifications or analytics.
 
-#### License
+### License
 This project is licensed under the MIT License. ![License: MIT](https://img.shields.io/badge/License-MIT-yellow)  
