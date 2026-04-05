@@ -20,10 +20,16 @@ def user_created_handler(sender, instance, created, **kwargs):
 
         Token.objects.create(user=instance)
 
-        if config("ENV", default="local") == "production":
-            send_welcome_email(instance.email, instance.username)
-        else:
-            send_welcome_email.delay(instance.email, instance.username)
+        try:
+            if config("ENV", default="local") == "production":
+                try:
+                    send_welcome_email(instance.email, instance.username)
+                except Exception as e:
+                    logger.error(f"Email sending failed (ignored): {e}") 
+            else:
+                send_welcome_email.delay(instance.email, instance.username)
+        except Exception as email_error:
+            logger.error(f"Error while sending welcome email: {email_error}")
 
     except Exception as e:
         logger.error(f"Error in user_created_handler signal: {e}")
