@@ -43,6 +43,8 @@ else:
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
+ENV = config("ENV", default="local")
+
 
 # Allowed hosts
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
@@ -108,8 +110,6 @@ WSGI_APPLICATION = 'hireflow.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
-ENV = os.getenv("ENV", "development")
 
 if ENV == "production":
     import dj_database_url
@@ -181,7 +181,7 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 
 # =============== celery settings =============== 
-if config("ENV", default="local")=="production":
+if ENV == "production":
     CELERY_BROKER_URL = CELERY_RESULT_BACKEND = config("REDIS_URL")
 else:
     CELERY_BROKER_URL = "memory://"
