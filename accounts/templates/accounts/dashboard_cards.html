@@ -5,15 +5,16 @@
         <div class="container-fluid">
             <div class="row">
                 
-                <!-- =============== total jobs =============== -->
+                <!-- =============== total jobs & applied jobs =============== -->
                 <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div>
 
-                                    {% if request.user.is_authenticated %}
-                                        {% if request.user.role == 'employer' %}
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.role == 'employer' %}
+                                        <!-- total jobs(employer) -->
+                                        <div>
                                             <h3 class="card-heading">Posted Jobs</h3>
                                             <span class="d-block job-num">
                                                 {% if total_jobs %}
@@ -22,7 +23,12 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% else %}
+                                        </div>
+
+                                    {% else %}
+
+                                        <!-- total applied(candidate) -->
+                                        <div>
                                             <h3 class="card-heading">Applied Jobs</h3>
                                             <span class="d-block job-num">
                                                 {% if total_applied %}
@@ -31,24 +37,25 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% endif %}
+                                        </div>
+                                        
                                     {% endif %}
-
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- =============== total applications =============== -->
+                <!-- =============== total applications & total accepted =============== -->
                 <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
+                            <div class="d-flex justify-content-between align-items-center card-content">
 
-                                    {% if request.user.is_authenticated %}
-                                        {% if request.user.role == 'employer' %}
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.role == 'employer' %}
+                                        <!-- total applications(employer) -->
+                                        <div>
                                             <h3 class="card-heading">Applications</h3>
                                             <span class="d-block job-num">
                                                 {% if total_applications %}
@@ -57,7 +64,11 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% else %}
+                                        </div>
+                                    {% else %}
+
+                                        <!-- total applied(candidate) -->
+                                        <div>
                                             <h3 class="card-heading">Accepted</h3>
                                             <span class="d-block job-num">
                                                 {% if total_accepted %}
@@ -66,33 +77,40 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% endif %}
+                                        </div>
+                                       
                                     {% endif %}
+                                {% endif %}
 
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- =============== active jobs =============== -->
+                <!-- =============== active jobs and pending jobs =============== -->
                 <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
+                            <div class="d-flex justify-content-between align-items-center card-content">
 
-                                    {% if request.user.is_authenticated %}
-                                        {% if request.user.role == 'employer' %}
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.role == 'employer' %}
+                                        <!-- active jobs(employer) -->
+                                        <div>
                                             <h3 class="card-heading">Active Jobs</h3>
-                                            <span class="d-block job-num ">
+                                            <span class="d-block job-num">
                                                 {% if active_jobs %}
                                                     {{ active_jobs }}
                                                 {% else %}
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% else %}
+                                        </div>
+
+                                    {% else %}
+
+                                        <!-- total pending(candidate) -->
+                                        <div>
                                             <h3 class="card-heading">Pending Jobs</h3>
                                             <span class="d-block job-num">
                                                 {% if total_pending %}
@@ -101,25 +119,27 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% endif %}
+                                        </div>
+                                    
                                     {% endif %}
-                        
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- =============== hires =============== -->
+                <!-- =============== hired and rejected =============== -->
                 <div class=" col-6 col-lg-3 g-4">
                     <div class="dashboard-card">
                         <div class="card card-body text-white transition border-radius">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
+                            <div class="d-flex justify-content-between align-items-center card-content">
 
-                                    {% if request.user.is_authenticated %}
-                                        {% if request.user.role == 'employer' %}
-                                            <h3 class="card-heading">Hired </h3>
+                                {% if request.user.is_authenticated %}
+                                    {% if request.user.role == 'employer' %}
+                                        <!-- total hired(employer) -->
+                                        <div>
+                                            <h3 class="card-heading">Hired</h3>
                                             <span class="d-block job-num">
                                                 {% if total_hired %}
                                                     {{ total_hired }}
@@ -127,7 +147,12 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% else %}
+                                        </div>
+
+                                    {% else %}
+
+                                        <!-- total rejected(candidate) -->
+                                        <div>
                                             <h3 class="card-heading">Rejected</h3>
                                             <span class="d-block job-num">
                                                 {% if total_rejected %}
@@ -136,9 +161,10 @@
                                                     0
                                                 {% endif %}
                                             </span>
-                                        {% endif %}
+                                        </div>
                                     {% endif %}
-                                </div>
+                                {% endif %}
+
                             </div>
                         </div>
                     </div>
@@ -147,3 +173,30 @@
             </div>
         </div>
     </div>
+
+
+
+<!-- =============== dashboard card js starts =============== -->
+<script>
+    document.querySelectorAll(".circle").forEach(el => {
+
+        let target = parseInt(el.getAttribute("data-percent")) || 0;
+        let countEl = el.querySelector("span");
+
+        let current = 0;
+
+        let interval = setInterval(() => {
+
+            if (current >= target) {
+                clearInterval(interval);
+                countEl.innerText = target + "%";
+            } else {
+                current++;
+                countEl.innerText = current + "%";
+            }
+
+        }, 15);
+
+    });
+</script>
+<!-- =============== dashboard card js ends =============== -->

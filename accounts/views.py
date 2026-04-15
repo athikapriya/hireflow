@@ -98,7 +98,10 @@ def employer_dashboard(request):
 
     total_applications = Application.objects.filter(job__in=jobs).count()
 
-    total_hired = Application.objects.filter(job__in=jobs, status="accepted").count()
+    total_hired = Application.objects.filter(
+        job__in=jobs,
+        status="accepted"
+    ).values('job').distinct().count()
 
     context = {
         "jobs": latest_jobs,
