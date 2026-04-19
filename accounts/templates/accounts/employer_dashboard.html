@@ -19,116 +19,166 @@
     <div class="container-fluid content-section">
         <div class="row">
 
+          <!-- =============== chart =============== -->
+            <div class="col-lg-6 g-4 chart">
+                <div class="section-bg p-4">
+                    <canvas id="employerChart"></canvas>
+                </div>
+            </div>
+
             <!-- =============== applications =============== -->
-            <div class="col-lg-7 col-xl-8 g-4 applications">
+            <div class="col-lg-6 g-4 applications">
                 
-             <div class="section-bg py-3 ">
-                <div class="mx-3">
-                        
-                    <div class="main-section__header">
-                        <h3 class="main-heading ms-2 mb-0">Recent Jobs</h3>
-                    </div>
+              <div class="section-bg py-3 ">
+                  <div class="mx-3">
+                          
+                      <div class="main-section__header">
+                          <h3 class="main-heading ms-2 mb-0">Recent Jobs</h3>
+                      </div>
 
-                    <div class="main-section__body mt-3">
-                        <div class="table-responsive">
-
-                            <table class="table table-sm align-middle table-nowrap table-hover">
+                      <div class="main-section__body mt-3">
+                          <div class="table-responsive">
+                              <table class="table table-sm align-middle table-nowrap table-hover">
                                 <thead class="table-secondary">
-                                    <th>Job Title</th>
-                                    <th>Status</th>
-                                    <th class="text-center">Applications</th>
-                                    <th>Deadline</th>
+                                    <tr>
+                                        <th>Designation</th>
+                                        <th>Type</th>
+                                        <th>Salary</th>
+                                        <th class="text-center">Applications</th>
+                                        <th>Status</th>
+                                    </tr>
                                 </thead>
 
                                 <tbody>
+                                    {% for job in jobs %}
                                     <tr>
-                                        {% for job in jobs %}
-                                            <td>{{ job.title }}</td>
-                                            <td>
-                                                {% if job.is_active %}
-                                                    <span class="status-badge status-active">Active</span>
-                                                {% else %}
-                                                    <span class="status-badge status-closed">Closed</span>
-                                                {% endif %}
-                                            </td>
-                                            <td class="text-center">{{ job.application_count }}</td>
-                                            <td>
-                                                {% if job.deadline %}
-                                                    {{ job.deadline }}
-                                                {% else %}
-                                                    -
-                                                {% endif %}
-                                            </td>
-                                        </tr>
+                                        <td>{{ job.title }}</td>
+
+                                        <td>
+                                            <span class="badge-custom py-1 px-2 rounded-4 
+                                                {% if job.employment_type == 'FT' %}badge-ft
+                                                {% elif job.employment_type == 'PT' %}badge-pt
+                                                {% elif job.employment_type == 'CT' %}badge-ct
+                                                {% elif job.employment_type == 'IN' %}badge-in
+                                                {% elif job.employment_type == 'FL' %}badge-fl
+                                                {% endif %}">
+                                                {{ job.get_employment_type_display }}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            {% if job.salary %}
+                                                <span class="salary fw-medium">$ {{ job.salary }}</span>
+                                            {% else %}
+                                                N/A
+                                            {% endif %}
+                                        </td>
+
+                                        <td class="text-center">
+                                            <span class="badge bg-light text-dark">
+                                                {{ job.application_count }}
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            {% if job.is_active %}
+                                                <span class="status-badge status-active">Active</span>
+                                            {% else %}
+                                                <span class="status-badge status-closed">Closed</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="7" class="text-center text-muted py-3">
+                                            No jobs found.
+                                        </td>
+                                    </tr>
                                     {% endfor %}
                                 </tbody>
+
                             </table>
 
-                        </div>
-                    </div>
+                          </div>
+                      </div>
 
-                </div>
+                  </div>
+              </div>
             </div>
-
-
-            </div>
-
-            <!-- =============== chart =============== -->
-            <div class="col-lg-5 col-xl-4 g-4 chart">
-                <div class="section-bg py-3">
-                    <canvas id="jobChart"></canvas>
-                </div>
-            </div>
-
         </div>
     </div>
-
-
 </div>
-
 {% endblock %}
 
+
 {% block script %}
+
 <script>
-    const data = {
-        labels: ['Total Jobs', 'Active Jobs', 'Closed Jobs', 'Applications', 'Hired'],
-        datasets: [{
-            data: [
-                {{ total_jobs|default:0 }},
-                {{ active_jobs|default:0 }},
-                {{ closed_jobs|default:0 }},
-                {{ total_applications|default:0 }},
-                {{ total_hired|default:0 }}
-            ],
-            backgroundColor: [
-                '#059BFF',  // Total Jobs
-                '#22CFCF',  // Active Jobs
-                '#FF4069',  // Closed Jobs
-                '#405189',  // Applications
-                '#FFC234'   // Hired
-            ],
-            borderWidth: 1
-        }]
-    };
+  const labels = {{ chart_labels|safe }};
+  const applications = {{ chart_applications|safe }};
+  const hired = {{ chart_hired|safe }};
+  const rejected = {{ chart_rejected|safe }};
 
-    const config = {
-        type: 'doughnut',
-        data: data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Jobs & Applications Overview'
-                }
-            }
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Applications',
+        data: applications,
+        borderColor: '#405189',
+        backgroundColor: 'transparent',
+        tension: 0.4,
+        pointRadius: 4
+      },
+      {
+        label: 'Hired',
+        data: hired,
+        borderColor: '#22CFCF',
+        backgroundColor: 'transparent',
+        tension: 0.4,
+        pointRadius: 4
+      },
+      {
+        label: 'Rejected',
+        data: rejected,
+        borderColor: '#FF4069',
+        backgroundColor: 'transparent',
+        tension: 0.4,
+        pointRadius: 4
+      }
+    ]
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {
+      responsive: true,
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      plugins: {
+        title: {
+          display: true,
+          text: 'Applications vs Hired vs Rejected (Last 7 Days)'
+        },
+        tooltip: {
+          position: 'nearest'
+        },
+        legend: {
+          position: 'top'
         }
-    };
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
 
-    const ctx = document.getElementById('jobChart');
-    new Chart(ctx, config);
+  new Chart(document.getElementById('employerChart'), config);
 </script>
 {% endblock %}
