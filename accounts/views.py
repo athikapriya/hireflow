@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Count
+from django.utils import timezone
+from datetime import timedelta
 
 
 from .forms import CandidateRegisterForm, EmployerRegisterForm, CandidateProfileForm, EmployerProfileForm
@@ -94,7 +96,7 @@ def employer_dashboard(request):
     active_jobs = jobs.filter(is_active=True).count()
     closed_jobs = jobs.filter(is_active=False).count()
 
-    latest_jobs = jobs[:6]
+    latest_jobs = jobs[:5]
 
     total_applications = Application.objects.filter(job__in=jobs).count()
 
@@ -102,6 +104,40 @@ def employer_dashboard(request):
         job__in=jobs,
         status="accepted"
     ).values('job').distinct().count()
+
+
+    today = timezone.now().date()
+    days = 7
+
+    labels = []
+    applications_data = []
+    hired_data = []
+    rejected_data = []
+
+    for i in range(days):
+        day = today - timedelta(days=(days - 1 - i))
+        labels.append(day.strftime("%d %b"))
+
+        apps = Application.objects.filter(
+            job__employer=request.user,
+            applied_at__date=day
+        ).count()
+
+        hired = Application.objects.filter(
+            job__employer=request.user,
+            status="accepted",
+            applied_at__date=day
+        ).count()
+
+        rejected = Application.objects.filter(
+            job__employer=request.user,
+            status="rejected",
+            applied_at__date=day
+        ).count()
+
+        applications_data.append(apps)
+        hired_data.append(hired)
+        rejected_data.append(rejected)
 
     context = {
         "jobs": latest_jobs,
@@ -111,6 +147,11 @@ def employer_dashboard(request):
         "total_applications": total_applications,
         "total_hired": total_hired,
         "page_title": page_title,
+
+        "chart_labels": labels,
+        "chart_applications": applications_data,
+        "chart_hired": hired_data,
+        "chart_rejected": rejected_data,
     }
 
     return render(request, 'accounts/employer_dashboard.html', context)
